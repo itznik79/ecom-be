@@ -1,0 +1,38 @@
+{
+  "name": "web-app-starter",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "install:all": "npm install && npm run build",
+    "db:migrate": "sequelize db:migrate --env development",
+    "db:migrate:undo": "sequelize db:migrate:undo --env development",
+    "db:migrate:undo:all": "sequelize db:migrate:undo:all --env development",
+    "db:seed": "sequelize db:seed:all --env development",
+    "db:seed:undo": "sequelize db:seed:undo:all --env development",
+    "infra:up": "docker-compose -f docker-compose.infra.yml up -d",
+    "infra:down": "docker-compose -f docker-compose.infra.yml down"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0",
+    "sequelize-cli": "^6.6.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.0.0"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6"
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "extends": "@app/tsconfig/nestjs.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmit": false,
+        "paths": {
+            "@app/common": [
+                "../../packages/common/dist"
+            ],
+            "@app/common/*": [
+                "../../packages/common/dist/*"
+            ],
+            "@app/database": [
+                "../../packages/database/dist"
+            ],
+            "@app/database/*": [
+                "../../packages/database/dist/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
