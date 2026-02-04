@@ -8,7 +8,9 @@
         "start": "nest start",
         "start:dev": "nest start --watch",
         "dev": "npm run start:dev",
-        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\""
+        "lint": "eslint \"{src,apps,libs,test}/**/*.ts\"",
+        "migrate": "npx sequelize-cli db:migrate",
+        "migrate:undo": "npx sequelize-cli db:migrate:undo"
     },
     "dependencies": {
         "@app/common": "file:../../packages/common",

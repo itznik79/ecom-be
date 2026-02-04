@@ -83,7 +83,7 @@ Ensure these variables are set in `.env`:
 ```env
 # Database
 DB_HOST=localhost
-DB_PORT=5432
+DB_PORT=5436
 DB_USER=postgres
 DB_PASSWORD=password
 DB_NAME=ecommerce
@@ -144,7 +144,7 @@ npm run test:cov
 ## 🐛 Troubleshooting
 
 ### Connection Refused
-- Ensure PostgreSQL is running on port 5432
+- Ensure PostgreSQL is running on port 5436 (mapped in docker-compose)
 - Check `.env` database credentials
 - Verify `DB_HOST` is correct (localhost for local, postgres in Docker)
 

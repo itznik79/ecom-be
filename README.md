@@ -7,21 +7,22 @@ A scalable Monorepo setup using **NestJS**, **Turborepo**, and **Sequelize**.
 This repository is organized as a monorepo using `npm workspaces` and `Turborepo`.
 
 *   **apps/**: Contains independent microservices.
-    *   `auth`: Authentication Service (JWT, Login, Register).
-    *   `user`: User Management Service (Profiles, Roles, Permissions).
-    *   `category`: Category Service (Product Taxonomy).
+    *   `auth`: Authentication Service.
+    *   `user`: User Management Service.
+    *   `category`: Category Service.
 *   **packages/**: Shared libraries used across services.
     *   `database`: Shared database connection logic.
     *   `common`: Shared utilities (Response Wrappers, Constants, Logger).
-*   **scripts/**: Utility scripts for setup and maintenance.
 
 ## 🚀 Getting Started
 
+Follow these steps to set up and run the project locally.
+
 ### Prerequisites
 *   Node.js (v18+)
-*   Docker & Docker Compose (for Postgres/Redis)
+*   Docker & Docker Compose
 
-### Installation
+### Fast Track Setup
 
 1.  **Install Dependencies**
     ```bash
@@ -29,36 +30,63 @@ This repository is organized as a monorepo using `npm workspaces` and `Turborepo
     ```
 
 2.  **Environment Setup**
-    Copy `.env.example` (if exists) or create `.env` in the root (see `env.example` content below).
+    Ensure `.env` exists in the root with the following configuration (updated for custom ports):
+    ```env
+    # Database Configuration
+    DB_HOST=localhost
+    DB_PORT=5436
+    DB_USER=postgres
+    DB_PASSWORD=password
+    DB_NAME=ecommerce
+    AUTH_DB_NAME=auth_db
+    USER_DB_NAME=user_db
+    CATEGORY_DB_NAME=category_db
 
-3.  **Start Infrastructure**
-    ```bash
-    docker-compose up -d
+    # Redis Configuration
+    REDIS_HOST=localhost
+    REDIS_PORT=6380
+
+    # Node Environment
+    NODE_ENV=development
     ```
 
-4.  **Run Migrations**
-    Initialize the database tables for all services.
+3.  **Start Infrastructure (Postgres & Redis)**
+    This will start `ecom-be-postgres` (port 5436) and `ecom-be-redis` (port 6380).
     ```bash
-    # Run inside each app directory (TEMPORARY: automation script coming soon)
-    # cd apps/auth && npx sequelize-cli db:migrate
-    # cd apps/user && npx sequelize-cli db:migrate
-    # cd apps/category && npx sequelize-cli db:migrate
+    npm run infra:up
     ```
 
-5.  **Start Development**
-    Run all apps in parallel using Turborepo.
+4.  **Build Shared Packages**
+    **Critical Step:** You must build the shared libraries before starting the apps.
     ```bash
-    npm run dev
+    npm run build
     ```
 
-## 🛠 Features
+5.  **Run Migrations**
+    Initialize the database schemas for each service.
+    ```bash
+    # Run in parallel (future improvement) or sequentially in separate terminals
+    cd apps/auth && npm run migrate
+    cd apps/user && npm run migrate
+    cd apps/category && npm run migrate
+    ```
 
-*   **Microservices Architecture**: Modular and independently scalable services.
-*   **Shared Code**: `packages/common` ensures strict typing (`ApiResponse`, `MESSAGES`) consistency across all APIs.
-*   **Database**: PostgreSQL with Sequelize ORM.
-*   **Type Safety**: All models use TypeScript Interfaces for compile-time validation.
-*   **Repo Tooling**: Turborepo for efficient builds and caching.
+6.  **Start All Services**
+    This starts `auth`, `user`, and `category` services in parallel.
+    ```bash
+    npm run start
+    ```
 
-## 📝 Recent Updates
-*   **Refactored Models**: Services now use Interface-based models (`User extends Model<IUser>`).
-*   **Centralized Utilities**: Response formats and Error messages moved to `@app/common`.
+## 🛠 Troubleshooting
+
+### Missing Databases
+If services fail with `database "auth_db" does not exist`, the initialization script might have been skipped.
+**Fix:** Manually create the databases:
+```bash
+docker exec -i ecom-be-postgres psql -U postgres -d ecommerce -c "CREATE DATABASE auth_db; CREATE DATABASE user_db; CREATE DATABASE category_db;"
+```
+
+### Port Conflicts
+*   **Postgres** runs on **5436** (mapped to 5432 internally).
+*   **Redis** runs on **6380** (mapped to 6379 internally).
+Ensure these ports are free on your machine.

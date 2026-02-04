@@ -3,13 +3,14 @@ version: '3.8'
 services:
   postgres-new:
     image: postgres:16-alpine
+    container_name: ecom-be-postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: ecommerce
     ports:
-      - "5435:5432"
+      - "5436:5432"
     volumes:
       - postgres_data_new:/var/lib/postgresql/data
       - ./scripts/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
@@ -23,9 +24,10 @@ services:
 
   redis:
     image: redis:7-alpine
+    container_name: ecom-be-redis
     restart: always
     ports:
-      - "6379:6379"
+      - "6380:6379"
     volumes:
       - redis_data:/data
     healthcheck:
