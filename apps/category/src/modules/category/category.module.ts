@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { CategoryController } from './controllers/category.controller';
-import { CategoryService } from './services/category.service';
-import { CategoryDao } from './dao/category.dao';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { CategoryController } from './category.controller';
+import { CategoryService } from './category.service';
+import { CategoryDao } from './category.dao';
+import { Category } from './category.model';
 
 @Module({
+    imports: [SequelizeModule.forFeature([Category])],
     controllers: [CategoryController],
     providers: [CategoryService, CategoryDao],
     exports: [CategoryService],

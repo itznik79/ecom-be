@@ -1,11 +1,10 @@
 import { Table, Column, Model, DataType, PrimaryKey, Default, ForeignKey, BelongsTo, HasMany } from 'sequelize-typescript';
-import { v4 as uuidv4 } from 'uuid';
-import { ICategory } from '../types';
+import { ICategory } from '../../types';
 
 @Table({ tableName: 'categories', timestamps: true, underscored: true })
 export class Category extends Model<ICategory> {
     @PrimaryKey
-    @Default(uuidv4)
+    @Default(DataType.UUIDV4)
     @Column(DataType.UUID)
     id: string;
 
