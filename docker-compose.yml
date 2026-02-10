@@ -35,6 +35,32 @@ services:
     networks:
       - app-network
 
+  api-gateway:
+    build:
+      context: .
+      dockerfile: apps/api-gateway/Dockerfile
+    restart: on-failure
+    environment:
+      NODE_ENV: development
+      AUTH_SERVICE_URL: http://auth-service:3001
+      USER_SERVICE_URL: http://user-service:3001
+      CATEGORY_SERVICE_URL: http://category-service:3001
+      PRODUCT_SERVICE_URL: http://product:3004
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    depends_on:
+      - auth-service
+      - user-service
+      - category-service
+      - product
+    volumes:
+      - ./apps/api-gateway/src:/app/src
+      - ./apps/api-gateway/node_modules:/app/node_modules
+    networks:
+      - app-network
+    command: npm run start:dev
+
   auth-service:
     build:
       context: .

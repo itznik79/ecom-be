@@ -32,6 +32,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "http-proxy-middleware": "^3.0.5",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6"
   }
