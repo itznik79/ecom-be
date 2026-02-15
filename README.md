@@ -14,6 +14,18 @@ This repository is organized as a monorepo using `npm workspaces` and `Turborepo
     *   `database`: Shared database connection logic.
     *   `common`: Shared utilities (Response Wrappers, Constants, Logger).
 
+## 📚 Masterclass Implementation Guides
+For a "perfect" step-by-step walkthrough of our enterprise systems:
+- **[Masterclass: Google Social Login](docs/guides/GOOGLE_LOGIN_MASTERCLASS.md)**
+- **[Masterclass: PBAC Authorization](docs/guides/PBAC_MASTERCLASS.md)**
+- **[Masterclass: Stateful Session Management](docs/guides/STATEFUL_SESSION_MASTERCLASS.md)**
+- **[Masterclass: API Gateway & Microservices](docs/guides/API_GATEWAY_MASTERCLASS.md)**
+
+## 🏗 System Architecture
+- **[Social Login Flow (Google)](docs/architecture/social-login.md)**
+- **[Token & Session Management](docs/architecture/token-management.md)**
+- **[API Gateway Architecture](docs/gateway/api-gateway.md)**
+
 ## 🚀 Getting Started
 
 Follow these steps to set up and run the project locally.

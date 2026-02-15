@@ -19,8 +19,14 @@
     "infra:down": "docker-compose -f docker-compose.infra.yml down"
   },
   "devDependencies": {
+    "@nestjs/testing": "^11.1.13",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.2.0",
     "prettier": "^3.0.0",
     "sequelize-cli": "^6.6.0",
+    "supertest": "^7.2.2",
+    "ts-jest": "^29.4.6",
     "turbo": "^2.0.0",
     "typescript": "^5.0.0"
   },
@@ -33,6 +39,7 @@
   },
   "dependencies": {
     "http-proxy-middleware": "^3.0.5",
+    "passport-google-oauth20": "^2.0.0",
     "sequelize": "^6.37.7",
     "sequelize-typescript": "^2.1.6"
   }

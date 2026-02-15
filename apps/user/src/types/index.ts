@@ -1,5 +1,6 @@
 export interface IUser {
     id: string;
+    credential_id: string;
     email: string;
     provider: string;
     provider_id?: string;

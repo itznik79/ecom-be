@@ -2,10 +2,12 @@
     "extends": "@app/tsconfig/nestjs.json",
     "compilerOptions": {
         "outDir": "./dist",
-        "rootDir": "./src",
         "module": "commonjs",
         "moduleResolution": "node",
         "noEmit": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
         "paths": {
             "@app/common": [
                 "../../packages/common/dist"

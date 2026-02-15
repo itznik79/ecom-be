@@ -4,7 +4,7 @@
     "password": "password",
     "database": "ecommerce",
     "host": "localhost",
-    "port": 5432,
+    "port": 5436,
     "dialect": "postgres"
   },
   "test": {
@@ -12,7 +12,7 @@
     "password": "password",
     "database": "ecommerce_test",
     "host": "localhost",
-    "port": 5432,
+    "port": 5436,
     "dialect": "postgres"
   },
   "production": {
@@ -20,7 +20,7 @@
     "password": "password",
     "database": "ecommerce",
     "host": "localhost",
-    "port": 5432,
+    "port": 5436,
     "dialect": "postgres",
     "operatorsAliases": false
   }

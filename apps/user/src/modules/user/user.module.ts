@@ -1,9 +1,12 @@
 import { Module } from '@nestjs/common';
-import { UserController } from './controllers/user.controller';
-import { UserService } from './services/user.service';
-import { UserDao } from './dao/user.dao';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { UserController } from './user.controller';
+import { UserService } from './user.service';
+import { UserDao } from './user.dao';
+import { User, UserProfile, UserAddress, Role, UserRole, Permission, RolePermission } from '../../models';
 
 @Module({
+    imports: [SequelizeModule.forFeature([User, UserProfile, UserAddress, Role, UserRole, Permission, RolePermission])],
     controllers: [UserController],
     providers: [UserService, UserDao],
     exports: [UserService],

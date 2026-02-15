@@ -3,6 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@app/database';
 import { User, UserProfile, UserAddress, Role, Permission, UserRole, RolePermission } from './models';
 import { UserModule } from './modules/user/user.module';
+import { RoleModule } from './modules/role/role.module';
+import { PermissionModule } from './modules/permission/permission.module';
+import { RolePermissionModule } from './modules/role-permission/role-permission.module';
+import { UserProfileModule } from './modules/user-profile/user-profile.module';
+import { UserRoleModule } from './modules/user-role/user-role.module';
 
 @Module({
     imports: [
@@ -12,6 +17,11 @@ import { UserModule } from './modules/user/user.module';
             models: [User, UserProfile, UserAddress, Role, Permission, UserRole, RolePermission]
         }),
         UserModule,
+        RoleModule,
+        PermissionModule,
+        RolePermissionModule,
+        UserProfileModule,
+        UserRoleModule,
     ],
 })
 export class AppModule { }

@@ -33,6 +33,11 @@ The project runs on a local Dockerized infrastructure (`docker-compose.infra.yml
 2.  Each service connects to its **own dedicated database** within the Postgres cluster.
 3.  Services use shared logging (Winston) and database entities (Sequelize Models) from the shared packages.
 
+## Detailed Module Architecture
+- [Token & Session Management](docs/architecture/token-management.md)
+- [Distributed User Registration](docs/architecture/user-registration.md)
+- [Social Login Flow (Google)](docs/architecture/social-login.md)
+
 ## Build System
 - **Turborepo** manages dependencies and tasks.
 - Shared packages must be built (`npm run build`) before applications can compile.
