@@ -6,6 +6,9 @@
         "module": "commonjs",
         "moduleResolution": "node",
         "noEmit": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "useDefineForClassFields": false,
         "paths": {
             "@app/common": [
                 "../../packages/common/dist"
@@ -23,9 +26,5 @@
     },
     "include": [
         "src/**/*"
-    ],
-    "files": [
-        "src/main.ts",
-        "src/app.module.ts"
     ]
 }

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@app/database';
-import { UserCredential, RefreshToken } from './models';
+import { UserCredential, RefreshToken } from './models/index';
 import { AuthModule } from './modules/auth/auth.module';
 
 @Module({

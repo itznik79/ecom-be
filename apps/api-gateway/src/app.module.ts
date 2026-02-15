@@ -19,7 +19,7 @@ export class AppModule implements NestModule {
         consumer
             .apply(
                 createProxyMiddleware({
-                    target: process.env.USER_SERVICE_URL || 'http://localhost:3003',
+                    target: process.env.USER_SERVICE_URL || 'http://localhost:3002',
                     changeOrigin: true,
                     pathRewrite: {
                         '^/users': '',
@@ -31,7 +31,7 @@ export class AppModule implements NestModule {
         consumer
             .apply(
                 createProxyMiddleware({
-                    target: process.env.CATEGORY_SERVICE_URL || 'http://localhost:3002',
+                    target: process.env.CATEGORY_SERVICE_URL || 'http://localhost:3003',
                     changeOrigin: true,
                     pathRewrite: {
                         '^/categories': '',

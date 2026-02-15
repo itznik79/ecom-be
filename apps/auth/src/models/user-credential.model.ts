@@ -1,6 +1,7 @@
 import { Table, Column, Model, DataType, PrimaryKey, Default } from 'sequelize-typescript';
 import { v4 as uuidv4 } from 'uuid';
 import { IUserCredential } from '../types';
+import { AuthProvider } from '../types/auth-provider.enum';
 
 @Table({ tableName: 'user_credentials', timestamps: true, underscored: true })
 export class UserCredential extends Model<IUserCredential> {
@@ -15,8 +16,11 @@ export class UserCredential extends Model<IUserCredential> {
     @Column({ type: DataType.STRING, allowNull: true })
     password_hash: string; // Nullable for OAuth
 
-    @Column({ type: DataType.STRING, allowNull: false })
-    provider: string; // local | google | github
+    @Column({
+        type: DataType.ENUM(...Object.values(AuthProvider)),
+        allowNull: false,
+    })
+    provider: AuthProvider;
 
     @Column({ type: DataType.STRING, allowNull: true })
     provider_id: string;

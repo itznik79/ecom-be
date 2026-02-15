@@ -1,5 +1,7 @@
 export * from './constants/messages.constants';
 export * from './utils/response.utils';
+export * from './redis/redis.module';
+export * from './redis/redis.service';
 export * from './logger/app.logger';
 export * from './constants/pagination.constants';
 export * from './types/pagination.types';
@@ -8,3 +10,9 @@ export * from './filters/http-exception.filter';
 export * from './utils/bootstrap.utils';
 export * from './pipes/joi-validation.pipe';
 export * from './schemas/pagination.schema';
+export * from './utils/bcrypt.utils';
+export * from './utils/jwt.utils';
+export * from './utils/otp.utils';
+export * from './utils/cookie.utils';
+export * from './decorators/permissions.decorator';
+export { PERMISSIONS_KEY } from './decorators/permissions.decorator';

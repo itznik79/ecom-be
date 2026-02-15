@@ -5,8 +5,11 @@ export const MESSAGES = {
     FORBIDDEN: 'Forbidden resource',
     NOT_FOUND: 'Resource not found',
     VALIDATION_ERROR: 'Validation failed',
+    INVALID_CREDENTIALS: 'Invalid credentials',
     INTERNAL_SERVER_ERROR: 'Internal server error',
     CREATED: 'Resource created successfully',
+    UPDATED: 'Resource updated successfully',
+    DELETED: 'Resource deleted successfully',
     // Dynamic messages
     NOT_FOUND_ENTITY: (entity: string) => `${entity} not found`,
     EXISTS_ENTITY: (entity: string) => `${entity} already exists`,

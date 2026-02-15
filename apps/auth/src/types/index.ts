@@ -1,8 +1,10 @@
+import { AuthProvider } from './auth-provider.enum';
+
 export interface IUserCredential {
     user_id: string;
     email: string;
     password_hash?: string;
-    provider: string;
+    provider: AuthProvider;
     provider_id?: string;
     is_active: boolean;
     last_login_at?: Date;
