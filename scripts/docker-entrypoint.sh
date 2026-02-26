@@ -26,12 +26,26 @@ npm install
 echo "🔨 Building..."
 npm run build
 
-# Run migrations (from root level)
+# Run migrations (from repo root)
 echo "🗄️ Running database migrations..."
-cd /app/..
+cd /app || exit 1
 npm run db:migrate || echo "⚠️ Migrations may have already been run"
 
-# Start the service
+# Start the service: if root package.json doesn't expose start:dev,
+# find the first workspace under /app/apps that provides it and run there.
 echo "▶️ Starting application..."
-cd /app
+SERVICE_DIR="/app"
+if npm run | grep -q "start:dev"; then
+  SERVICE_DIR="/app"
+else
+  for d in /app/apps/*; do
+    if [ -f "$d/package.json" ] && grep -q '"start:dev"' "$d/package.json"; then
+      SERVICE_DIR="$d"
+      break
+    fi
+  done
+fi
+
+echo "Starting service from $SERVICE_DIR"
+cd "$SERVICE_DIR" || exit 1
 npm run start:dev

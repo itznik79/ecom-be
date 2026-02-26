@@ -49,6 +49,10 @@ services:
       PORT: 4000
     ports:
       - "4000:4000"
+    env_file:
+      - ./.env
+    working_dir: /app/apps/api-gateway
+    command: npm run start:dev
     depends_on:
       - auth-service
       - user-service
@@ -59,7 +63,7 @@ services:
       - ./apps/api-gateway/node_modules:/app/node_modules
     networks:
       - app-network
-    command: npm run start:dev
+    
 
   auth-service:
     build:
@@ -76,7 +80,11 @@ services:
       REDIS_HOST: redis
       REDIS_PORT: 6379
     ports:
-      - "3001:3001"
+      - "30011:3001"
+    env_file:
+      - ./.env
+    working_dir: /app/apps/auth
+    command: npm run start:dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -87,7 +95,7 @@ services:
       - ./apps/auth/node_modules:/app/node_modules
     networks:
       - app-network
-    command: npm run start:dev
+    
 
   category-service:
     build:
@@ -102,7 +110,11 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-password}
       DB_NAME: ${DB_NAME:-ecommerce}
     ports:
-      - "3002:3001"
+      - "30012:3001"
+    env_file:
+      - ./.env
+    working_dir: /app/apps/category
+    command: npm run start:dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -111,7 +123,7 @@ services:
       - ./apps/category/node_modules:/app/node_modules
     networks:
       - app-network
-    command: npm run start:dev
+    
 
   product:
     build:
@@ -127,7 +139,11 @@ services:
       DB_NAME: ${DB_NAME:-ecommerce}
       PRODUCT_DB_NAME: product_db
     ports:
-      - "3004:3004"
+      - "30014:3004"
+    env_file:
+      - ./.env
+    working_dir: /app/apps/product
+    command: npm run start:dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -136,7 +152,7 @@ services:
       - ./apps/product/node_modules:/app/node_modules
     networks:
       - app-network
-    command: npm run start:dev
+    
 
   user-service:
     build:
@@ -151,7 +167,11 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-password}
       DB_NAME: ${DB_NAME:-ecommerce}
     ports:
-      - "3003:3001"
+      - "30013:3001"
+    env_file:
+      - ./.env
+    working_dir: /app/apps/user
+    command: npm run start:dev
     depends_on:
       postgres:
         condition: service_healthy
@@ -160,11 +180,37 @@ services:
       - ./apps/user/node_modules:/app/node_modules
     networks:
       - app-network
-    command: npm run start:dev
+    
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ./packages/monitoring/config/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./packages/monitoring/config/grafana/provisioning:/etc/grafana/provisioning:ro
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
   redis_data:
+  grafana_data:
 
 
 networks:

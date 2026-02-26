@@ -1,0 +1,16 @@
+{
+  "name": "@app/monitoring",
+  "version": "0.0.1",
+  "private": true,
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@sentry/node": "^8.0.0",
+    "prom-client": "^14.0.0",
+    "winston": "^3.8.0"
+  }
+}
