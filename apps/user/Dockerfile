@@ -1,15 +1,16 @@
 FROM node:18-alpine
 
+# set working dir
 WORKDIR /app
 
 # Copy root package files
-COPY ../../package.json ../../package-lock.json ./
+COPY package.json package-lock.json ./
 
 # Copy workspace packages
-COPY ../../packages ./packages
+COPY packages ./packages
 
 # Copy scripts
-COPY ../../scripts ./scripts
+COPY scripts ./scripts
 
 # Copy user service
 COPY . .

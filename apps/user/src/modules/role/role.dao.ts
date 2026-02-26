@@ -22,6 +22,10 @@ export class RoleDao {
         });
     }
 
+    async findByName(name: string): Promise<Role | null> {
+        return this.roleModel.findOne({ where: { name } });
+    }
+
     async findById(id: string): Promise<Role | null> {
         return this.roleModel.findByPk(id);
     }

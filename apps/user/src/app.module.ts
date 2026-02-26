@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { MonitoringModule } from '../../../packages/monitoring/dist/monitoring.module';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from '@app/database';
 import { User, UserProfile, UserAddress, Role, Permission, UserRole, RolePermission } from './models';
@@ -22,6 +23,7 @@ import { UserRoleModule } from './modules/user-role/user-role.module';
         RolePermissionModule,
         UserProfileModule,
         UserRoleModule,
+        MonitoringModule.forRoot({ sentry: { dsn: process.env.SENTRY_DSN, env: process.env.NODE_ENV }, metrics: true }),
     ],
 })
 export class AppModule { }

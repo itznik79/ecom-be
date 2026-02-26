@@ -1,6 +1,6 @@
-import { ConflictException, Injectable, InternalServerErrorException, NotFoundException, BadRequestException } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { RoleDao } from './role.dao';
-import { ApiBuilder, MESSAGES, PaginationQuery } from '@app/common';
+import { ApiBuilder, MESSAGES } from '@app/common';
 import { IRole } from '../../types';
 
 @Injectable()
@@ -9,6 +9,8 @@ export class RoleService {
 
     async create(payload: Partial<IRole>) {
         try {
+            const existingRole = await this.roleDao.findByName(payload.name);
+            if (existingRole) throw new ConflictException(MESSAGES.EXISTS_ENTITY('Role'));
             const role = await this.roleDao.create(payload);
             return ApiBuilder.success(role, MESSAGES.CREATED).build();
         } catch (error) {
