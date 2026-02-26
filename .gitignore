@@ -36,3 +36,14 @@ Thumbs.db
 
 # Coverage
 coverage/
+
+# Local monitoring duplicate config (we use packages/monitoring/config)
+monitoring-config/
+
+# Logs and run artifacts
+*.log
+**/run.log
+
+# Generated targets file (local test output)
+targets.json
+
